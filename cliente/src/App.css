@@ -66,6 +66,8 @@
   float: left;
 }
 
+/* Menu navegación */
+
 #menu{
   text-align: left;
 }
@@ -121,4 +123,67 @@
 
 #menu ul li:hover > ul {
   display:block;
+}
+
+/* Campos formulario */
+
+form input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+form input[type=submit] {
+  width: 100%;
+  background-color: rgb(68, 75, 170);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form input[type=submit]:hover {
+  background-color: rgb(68, 75, 150);
+}
+
+div.form{
+  overflow:hidden;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  flex-flow: column;
+}
+
+/* Campos tabla */
+div.table{
+  overflow:hidden;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  flex-flow: column;
+}
+
+div.table table{
+  width:100%;
+  font-family: 'Arial';
+  margin: 25px auto;
+  border-collapse: collapse;
+}
+
+div.table td,th{
+  padding: .5em;
+}
+
+div.table tbody tr:nth-child(odd) {
+  background: #fafafa;
+}
+
+div.table tbody tr:nth-child(even) {
+  background: #ffffff;
 }

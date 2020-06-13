@@ -42,7 +42,7 @@ const Empleados = () => {
 
   function handleDelete(id){
     if(API.getEmpresa(id)){
-      alert.error('El empleado es responsable de una empresa',1)
+      alert('El empleado es responsable de una empresa',1)
     }else{
       API.deleteEmpleado(id)
         .catch(console.log)
@@ -51,56 +51,64 @@ const Empleados = () => {
   }
 
   function handleSubmit(empleado){
+    if(empleado._id){
       API.updateEmpleado(empleado)
         .catch(console.log)
+    }else{
+      API.saveEmpleado(empleado)
+        .catch(console.log)
+    }
     setLoading(true)
   }
 
   return (
-    <div>
-      Tabla de empleados
-      <table>
-        <tr>
-          <th>Nombre</th>
-          <th>Acción</th>
-        </tr>
-          {
-            
-              {empleados}?
-              empleados.map(e => 
-                <tr>
-                <td>
-                  {e.nombre}
-                </td>
-                <td>
-                  <button>onClick={() => {
-                    setClaveEmpleado(e._id)
-                    setEditable(true)
-                    }}
-                  </button>
-                  <button onClick={() => handleDelete(e._id)}/>
-                </td>
-                </tr>
-              ):<td>Sin datos</td>
-            
-          } 
-      </table>
-      <span>Formulario</span>
-      <form onSubmit = {(event) => {handleSubmit(event)}} >
-        <input label="Nombre"
-        name="nombre"></input>
-        <input label="Apellido 1"
-        name="apellido1"></input>
-        <input label="Apellido 2"
-        name="apellido2"></input>
-        <input label="Fecha Alta"
-        name="fechaAlta"></input>
-        <input label="Fecha Baja"
-        name="fechaBaja"></input>
-        <button>Volver</button>
-        <button>Guardar</button>
-      </form>
-    </div>
+    <>
+      <div className="table">
+        <h4>Tabla de empleados</h4>
+        <table>
+          <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Acción</th>
+          </tr>
+          </thead>
+          <tbody>
+            {
+              
+                {empleados}?
+                empleados.map(e => 
+                  <tr>
+                  <td>
+                    {e.nombreCompleto}
+                  </td>
+                  <td>
+                    <button onClick={() => {
+                      setClaveEmpleado(e._id)
+                      setEditable(true)
+                      }}> Editar
+                    </button>
+                    <button onClick={() => handleDelete(e._id)}>Borrar</button>
+                  </td>
+                  </tr>
+                ):<td>Sin datos</td>
+              
+            } 
+        </tbody>
+        </table>
+      </div>
+      <p/>
+      <div className="form">
+        <h4>Empleado</h4>
+        <form onSubmit = {(event) => {handleSubmit(event)}} >
+          <input type="text" name="nombre" required placeholder="Nombre"/>
+          <input type="text" name="apellido1" required placeholder="Primer Apellido"/>
+          <input type="text" name="apellido2" required placeholder="Segundo Apellido"/>
+          <input type="text" name="fechaAlta" required placeholder="Fecha de Alta"/>
+          <input type="text" name="fechaBaja" placeholder="Fecha de Baja"/>
+          <input type="submit" value="Guardar"/>
+        </form>
+      </div>
+    </>
 )}
 
 export default Empleados
